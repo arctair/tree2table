@@ -19,12 +19,18 @@ class Tree2TableSpec extends Specification {
       [
         name: 'jerry',
         children: [
-          [name: 'melinda']
+          [
+            name: 'melinda',
+            children: [
+              [name: 'george'],
+            ],
+          ],
         ],
       ],
     ]) == [
       [[name: 'jerry']],
       [[name: 'melinda']],
+      [[name: 'george']],
     ]
   }
 }
