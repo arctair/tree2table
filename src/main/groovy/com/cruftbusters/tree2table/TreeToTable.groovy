@@ -9,8 +9,8 @@ class TreeToTable {
       ? rows.last().size()
       : 1
     root = width > 1
-        ? [*:root, width: width]
-        : root
+      ? [*: root, width: width]
+      : root
     root.name ? [unlinkChildren(root), *rows] : rows
   }
 
@@ -22,9 +22,12 @@ class TreeToTable {
   }
 
   private static List setHeight(List slice, int height) {
-    [].tap { next ->
-      (slice.size()..<height).each { add([[:]]) }
-      addAll(slice)
+    whitespace(slice.last().size(), height - slice.size()) + slice
+  }
+
+  private static List whitespace(int width, int height) {
+    (0..<height).collect {
+      (0..<width).collect { [:] }
     }
   }
 
