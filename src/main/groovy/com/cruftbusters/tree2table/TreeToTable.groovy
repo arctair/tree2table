@@ -21,8 +21,8 @@ class TreeToTable {
 
   private static List setHeight(List slice, int height) {
     [].tap { next ->
+      (slice.size()..<height).each { add([[:]]) }
       addAll(slice)
-      (size()..<height).each { add([]) }
     }
   }
 

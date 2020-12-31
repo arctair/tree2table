@@ -37,4 +37,22 @@ class Tree2TableSpec extends Specification {
       [[name: 'george']],
     ]
   }
+
+  def 'left pad parent'() {
+    expect:
+    TreeToTable.convert(
+      children: [
+        [name: 'anthony'],
+        [
+          name    : 'aster',
+          children: [
+            [name: 'periwinkle'],
+          ],
+        ],
+      ],
+    ) == [
+      [[:], [name: 'aster']],
+      [[name: 'anthony'], [name: 'periwinkle']],
+    ]
+  }
 }
