@@ -15,7 +15,9 @@ class TreeToTable {
     root = width > 1
       ? [*: root, width: width]
       : root
-    root.name ? [unlinkChildren(root), *table] : table
+    root.name
+      ? [unlinkChildren(root), *table]
+      : table
   }
 
   private static List<List<Map>> joinTables(List<List<List<Map>>> tables) {
