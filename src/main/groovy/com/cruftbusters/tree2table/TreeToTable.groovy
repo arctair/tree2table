@@ -2,14 +2,16 @@ package com.cruftbusters.tree2table
 
 class TreeToTable {
   static List<List> convert(Map root) {
-    [
-      *(root.name
-        ? [unlinkChildren(root)]
-        : []),
-      *root.children
-        ? horizontalJoinSlices(root)
-        : [],
-    ]
+    List rows = root.children
+      ? horizontalJoinSlices(root)
+      : []
+    int width = rows.size() > 0
+      ? rows.last().size()
+      : 1
+    root = width > 1
+        ? [*:root, width: width]
+        : root
+    root.name ? [unlinkChildren(root), *rows] : rows
   }
 
   private static List<List> horizontalJoinSlices(Map node) {
