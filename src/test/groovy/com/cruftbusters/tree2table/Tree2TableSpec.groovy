@@ -93,4 +93,18 @@ class Tree2TableSpec extends Specification {
       [[name: 'ditto child'], [name: 'ditto child']],
     ]
   }
+
+  def 'no input mutation'() {
+    expect:
+    TreeToTable.createTable([
+      [
+        name: 'immutable',
+        children: [
+          [
+            name: 'also immutable',
+          ].asImmutable(),
+        ].asImmutable(),
+      ].asImmutable(),
+    ].asImmutable())
+  }
 }
