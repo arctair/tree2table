@@ -12,11 +12,13 @@ class TreeToTable {
     int width = table.size() > 0
       ? table.last().size()
       : 1
-    root = width > 1
-      ? [*: root, width: width]
-      : root
+    root = unlinkChildren(
+      width > 1
+        ? [*: root, width: width]
+        : root
+    )
     root.name
-      ? [unlinkChildren(root), *table]
+      ? [root, *table]
       : table
   }
 
