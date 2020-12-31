@@ -77,4 +77,20 @@ class Tree2TableSpec extends Specification {
       [[name: 'heather'], [name: 'emelia']],
     ]
   }
+
+  def 'node has occurrences'() {
+    expect:
+    TreeToTable.createTable([
+      [
+        name       : 'ditto',
+        occurrences: 2,
+        children   : [
+          [name: 'ditto child'],
+        ],
+      ],
+    ]) == [
+      [[name: 'ditto', occurrences: 2], [name: 'ditto', occurrences: 2]],
+      [[name: 'ditto child'], [name: 'ditto child']],
+    ]
+  }
 }

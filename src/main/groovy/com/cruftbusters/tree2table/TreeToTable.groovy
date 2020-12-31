@@ -18,7 +18,7 @@ class TreeToTable {
         : root
     )
     root.name
-      ? [root, *table]
+      ? joinTables((0..<(root.occurrences ?: 1)).collect{[root, *table]})
       : table
   }
 
