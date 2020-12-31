@@ -5,7 +5,7 @@ import spock.lang.Specification
 class Tree2TableSpec extends Specification {
   def 'flat tree to table'() {
     expect:
-    TreeToTable.convert(
+    TreeToTable.createTable(
       children: [
         [name: 'jerry'],
         [name: 'bob'],
@@ -17,7 +17,7 @@ class Tree2TableSpec extends Specification {
 
   def 'single branch tree to table'() {
     expect:
-    TreeToTable.convert(
+    TreeToTable.createTable(
       children: [
         [
           name    : 'jerry',
@@ -40,7 +40,7 @@ class Tree2TableSpec extends Specification {
 
   def 'left pad parent'() {
     expect:
-    TreeToTable.convert(
+    TreeToTable.createTable(
       children: [
         [
           name: 'sally',
@@ -70,7 +70,7 @@ class Tree2TableSpec extends Specification {
 
   def 'parent has two children'() {
     expect:
-    TreeToTable.convert(
+    TreeToTable.createTable(
       children: [
         [
           name    : 'olga',

@@ -1,9 +1,9 @@
 package com.cruftbusters.tree2table
 
 class TreeToTable {
-  static List<List> convert(Map root) {
+  static List<List> createTable(Map root) {
     List rows = root.children
-      ? horizontalJoinSlices(root)
+      ? joinTables(root)
       : []
     int width = rows.size() > 0
       ? rows.last().size()
@@ -14,14 +14,14 @@ class TreeToTable {
     root.name ? [unlinkChildren(root), *rows] : rows
   }
 
-  private static List<List> horizontalJoinSlices(Map node) {
-    List slices = node.children.collect(this.&convert)
+  private static List<List> joinTables(Map node) {
+    List slices = node.children.collect(this.&createTable)
     int maxHeight = slices*.size().max()
-    slices = slices.collect { this.&setHeight(it, maxHeight) }
-    (0..<maxHeight).collect { height -> slices*.getAt(height).flatten() }
+    List paddedSlices = slices.collect { this.&padTop(it, maxHeight) }
+    (0..<maxHeight).collect { height -> paddedSlices*.getAt(height).flatten() }
   }
 
-  private static List setHeight(List slice, int height) {
+  private static List padTop(List slice, int height) {
     whitespace(slice.last().size(), height - slice.size()) + slice
   }
 
