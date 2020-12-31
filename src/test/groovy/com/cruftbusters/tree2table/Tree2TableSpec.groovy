@@ -5,33 +5,29 @@ import spock.lang.Specification
 class Tree2TableSpec extends Specification {
   def 'flat tree to table'() {
     expect:
-    TreeToTable.createTable(
-      children: [
-        [name: 'jerry'],
-        [name: 'bob'],
-      ],
-    ) == [
+    TreeToTable.createTable([
+      [name: 'jerry'],
+      [name: 'bob'],
+    ]) == [
       [[name: 'jerry'], [name: 'bob']],
     ]
   }
 
   def 'single branch tree to table'() {
     expect:
-    TreeToTable.createTable(
-      children: [
-        [
-          name    : 'jerry',
-          children: [
-            [
-              name    : 'melinda',
-              children: [
-                [name: 'george'],
-              ],
+    TreeToTable.createTable([
+      [
+        name    : 'jerry',
+        children: [
+          [
+            name    : 'melinda',
+            children: [
+              [name: 'george'],
             ],
           ],
         ],
       ],
-    ) == [
+    ]) == [
       [[name: 'jerry']],
       [[name: 'melinda']],
       [[name: 'george']],
@@ -40,28 +36,26 @@ class Tree2TableSpec extends Specification {
 
   def 'left pad parent'() {
     expect:
-    TreeToTable.createTable(
-      children: [
-        [
-          name: 'sally',
-          children: [
-            [name: 'nick'],
-            [name: 'rainy'],
-          ],
+    TreeToTable.createTable([
+      [
+        name    : 'sally',
+        children: [
+          [name: 'nick'],
+          [name: 'rainy'],
         ],
-        [
-          name    : 'john',
-          children: [
-            [
-              name: 'son',
-              children: [
-                [name: 'leif'],
-              ],
+      ],
+      [
+        name    : 'john',
+        children: [
+          [
+            name    : 'son',
+            children: [
+              [name: 'leif'],
             ],
           ],
         ],
       ],
-    ) == [
+    ]) == [
       [[:], [:], [name: 'john']],
       [[name: 'sally', width: 2], [name: 'son']],
       [[name: 'nick'], [name: 'rainy'], [name: 'leif']],
@@ -70,17 +64,15 @@ class Tree2TableSpec extends Specification {
 
   def 'parent has two children'() {
     expect:
-    TreeToTable.createTable(
-      children: [
-        [
-          name    : 'olga',
-          children: [
-            [name: 'heather'],
-            [name: 'emelia'],
-          ]
-        ],
+    TreeToTable.createTable([
+      [
+        name    : 'olga',
+        children: [
+          [name: 'heather'],
+          [name: 'emelia'],
+        ]
       ],
-    ) == [
+    ]) == [
       [[name: 'olga', width: 2]],
       [[name: 'heather'], [name: 'emelia']],
     ]
